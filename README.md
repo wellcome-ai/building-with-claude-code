@@ -46,7 +46,7 @@ Once you've done the setup above, you don't need any extra plugins or tools, sin
 
 ## Video walkthrough
 
-A video walkthrough of the full process is coming, and the link will go here.
+A full video walkthrough of the process: https://drive.google.com/file/d/1rhaPYwx1W4Ie4DsDaV5zP-tWPa_u2D53/view
 
 ## Licence
 
