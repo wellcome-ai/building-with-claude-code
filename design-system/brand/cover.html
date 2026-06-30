@@ -1,0 +1,64 @@
+<!-- @dsCard group="Brand" name="Split — cover" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Split — Brand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --brand: #4f46e5; --brand-strong: #4338ca; --brand-soft: #ecebfd;
+    --positive: #15a86b; --negative: #e5484d;
+    --ink: #14152b; --muted: #6b7280; --surface: #fff; --bg: #f6f7f9; --border: #e6e8ec;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+  .wrap { padding: 48px; display: flex; flex-direction: column; gap: 28px; max-width: 720px; }
+  .logo { display: flex; align-items: center; gap: 14px; }
+  .mark {
+    width: 56px; height: 56px; border-radius: 16px;
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-strong) 100%);
+    display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 28px;
+    box-shadow: 0 8px 24px rgba(79,70,229,0.32);
+  }
+  h1 { font-size: 40px; font-weight: 800; margin: 0; letter-spacing: -0.02em; }
+  .tag { font-size: 18px; color: var(--muted); margin: 0; max-width: 46ch; line-height: 1.5; }
+  .swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+  .sw { display: flex; flex-direction: column; gap: 8px; }
+  .chip { width: 88px; height: 56px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.04); }
+  .chip + span { font-size: 12px; color: var(--muted); font-weight: 500; }
+  .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .pri { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
+  .pri b { display: block; font-size: 15px; margin-bottom: 6px; }
+  .pri p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo">
+      <div class="mark">S</div>
+      <div>
+        <h1>Split</h1>
+      </div>
+    </div>
+    <p class="tag">Share costs without the awkward maths. Track who paid, who owes, and settle up in a tap.</p>
+
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#4f46e5"></div><span>Brand</span></div>
+      <div class="sw"><div class="chip" style="background:#15a86b"></div><span>Owed to you</span></div>
+      <div class="sw"><div class="chip" style="background:#e5484d"></div><span>You owe</span></div>
+      <div class="sw"><div class="chip" style="background:#14152b"></div><span>Ink</span></div>
+      <div class="sw"><div class="chip" style="background:#f6f7f9;border:1px solid #e6e8ec"></div><span>Canvas</span></div>
+    </div>
+
+    <div class="principles">
+      <div class="pri"><b>Money is the hero</b><p>Balances are the biggest thing on every screen. Green is owed to you, red is what you owe. Never ambiguous.</p></div>
+      <div class="pri"><b>Fast to log</b><p>Adding an expense is three taps. Even split is the default; change it only if you need to.</p></div>
+      <div class="pri"><b>Calm, not corporate</b><p>Friendly and confident. Generous spacing, soft surfaces, one accent. No fintech grey sludge.</p></div>
+    </div>
+  </div>
+</body>
+</html>

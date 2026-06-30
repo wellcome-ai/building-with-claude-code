@@ -1,0 +1,45 @@
+<!-- @dsCard group="Components" name="Tabs & segmented control" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Split — Tabs</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: #f6f7f9; color: #14152b; padding: 40px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b7280; margin: 0 0 14px; font-weight: 600; }
+  .block { max-width: 380px; margin-bottom: 30px; }
+
+  /* Underline tabs — used on Group detail */
+  .tabs { display: flex; gap: 28px; border-bottom: 1.5px solid #e6e8ec; }
+  .tab { padding: 12px 0; font-size: 16px; font-weight: 600; color: #9aa1ad; position: relative; cursor: pointer; }
+  .tab.active { color: #14152b; }
+  .tab.active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1.5px; height: 3px; background: #4f46e5; border-radius: 3px 3px 0 0; }
+
+  /* Segmented control — used for split method */
+  .seg { display: flex; background: #eef0f3; border-radius: 12px; padding: 4px; }
+  .seg div { flex: 1; text-align: center; padding: 9px 0; font-size: 13px; font-weight: 600; color: #6b7280; border-radius: 9px; cursor: pointer; }
+  .seg div.on { background: #fff; color: #4338ca; box-shadow: 0 1px 3px rgba(20,21,43,0.10); }
+</style>
+</head>
+<body>
+  <div class="block">
+    <h2>Group detail tabs</h2>
+    <div class="tabs">
+      <div class="tab active">Balances</div>
+      <div class="tab">Activity</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>Split method (segmented)</h2>
+    <div class="seg">
+      <div class="on">Evenly</div>
+      <div>By shares</div>
+      <div>Exact</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!-- @dsCard group="Components" name="Avatars, empty state & FAB" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Split — Avatars & FAB</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: #f6f7f9; color: #14152b; padding: 40px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b7280; margin: 0 0 14px; font-weight: 600; }
+  section { margin-bottom: 32px; }
+  .av { width: 44px; height: 44px; border-radius: 999px; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 16px; }
+  .avrow { display: flex; gap: 10px; align-items: center; }
+  .stack { display: flex; }
+  .stack .av { width: 36px; height: 36px; font-size: 13px; border: 2.5px solid #f6f7f9; margin-left: -10px; }
+  .stack .av:first-child { margin-left: 0; }
+
+  .empty { max-width: 380px; background: #fff; border: 1px dashed #d3d7de; border-radius: 18px; padding: 40px 24px; text-align: center; }
+  .empty .ill { width: 64px; height: 64px; border-radius: 18px; background: #ecebfd; display: grid; place-items: center; margin: 0 auto 16px; font-size: 30px; }
+  .empty b { display: block; font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .empty p { margin: 0 0 18px; font-size: 14px; color: #6b7280; line-height: 1.5; }
+  .empty button { background: #4f46e5; color: #fff; border: 0; font-family: inherit; font-weight: 600; font-size: 15px; padding: 12px 22px; border-radius: 12px; cursor: pointer; }
+
+  .fabwrap { position: relative; width: 380px; height: 120px; background: #fff; border: 1px solid #e6e8ec; border-radius: 16px; }
+  .fab { position: absolute; right: 18px; bottom: 18px; width: 60px; height: 60px; border-radius: 18px; background: #4f46e5; color: #fff; border: 0; font-size: 30px; font-weight: 300; cursor: pointer; box-shadow: 0 6px 20px rgba(79,70,229,0.35); display: grid; place-items: center; }
+  .fab-ext { position: absolute; left: 18px; bottom: 18px; height: 52px; padding: 0 22px; border-radius: 16px; background: #4f46e5; color: #fff; border: 0; font-family: inherit; font-weight: 600; font-size: 15px; cursor: pointer; box-shadow: 0 6px 20px rgba(79,70,229,0.35); display: inline-flex; align-items: center; gap: 8px; }
+</style>
+</head>
+<body>
+  <section>
+    <h2>Avatars (initials, colour by name)</h2>
+    <div class="avrow">
+      <div class="av" style="background:#4f46e5">K</div>
+      <div class="av" style="background:#15a86b">S</div>
+      <div class="av" style="background:#e5484d">P</div>
+      <div class="av" style="background:#d97706">A</div>
+      <div class="av" style="background:#0891b2">M</div>
+    </div>
+    <div class="avrow" style="margin-top:16px">
+      <div class="stack">
+        <div class="av" style="background:#4f46e5">K</div>
+        <div class="av" style="background:#15a86b">S</div>
+        <div class="av" style="background:#e5484d">P</div>
+        <div class="av" style="background:#6b7280">+2</div>
+      </div>
+      <span style="font-size:13px;color:#6b7280">stacked, for group rows</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Empty state</h2>
+    <div class="empty">
+      <div class="ill">💸</div>
+      <b>No groups yet</b>
+      <p>Create a group to start splitting costs with friends, flatmates or your next trip.</p>
+      <button>Create a group</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Floating action button</h2>
+    <div class="fabwrap">
+      <button class="fab-ext">＋ Add expense</button>
+      <button class="fab">＋</button>
+    </div>
+  </section>
+</body>
+</html>

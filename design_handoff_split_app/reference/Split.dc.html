@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="design_doc_mode" content="canvas" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *{box-sizing:border-box;}
+    body{font-family:"Inter",system-ui,sans-serif;color:#14152b;}
+    input{font-family:inherit;}
+    button{font-family:inherit;}
+    .scr::-webkit-scrollbar{width:0;height:0;}
+  </style>
+</helmet>
+
+<!-- ============ TITLE / LEGEND ============ -->
+<div style="position:absolute;left:60px;top:48px;width:1200px">
+  <div style="display:flex;align-items:baseline;gap:14px">
+    <div style="font-size:30px;font-weight:800;letter-spacing:-0.02em">Split</div>
+    <div style="font-size:16px;color:#6b7280">Group expense tracker — user journeys &amp; live prototype</div>
+  </div>
+  <div style="display:flex;gap:10px;margin-top:13px">
+    <span style="display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;font-size:13px;font-weight:600;background:#e3f6ed;color:#0f7d50">▲ Owed to you</span>
+    <span style="display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;font-size:13px;font-weight:600;background:#fdecec;color:#c93a3f">▼ You owe</span>
+    <span style="display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;font-size:13px;font-weight:600;background:#eef0f3;color:#6b7280">All square</span>
+  </div>
+</div>
+
+<!-- ============ JOURNEY MAP ============ -->
+<div style="position:absolute;left:60px;top:160px;width:1280px">
+  <div data-drags-parent="1" style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;margin-bottom:12px">User journeys</div>
+  <div style="background:#fff;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.08),0 12px 30px rgba(20,21,43,.06);padding:6px 26px 14px">
+
+    <!-- LANE 1 -->
+    <div style="display:flex;align-items:flex-start;gap:18px;padding:22px 0;border-bottom:1px solid #eef0f3">
+      <div style="width:150px;flex:none;padding-top:36px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px"><div style="width:24px;height:24px;border-radius:8px;background:#4f46e5;color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center">1</div><div style="font-size:15px;font-weight:700">First use</div></div>
+        <div style="font-size:12.5px;color:#6b7280;line-height:1.5;margin-bottom:12px">Empty list → create a group, name it &amp; add members → land inside it.</div>
+        <button onClick="{{ jump1 }}" style="background:#ecebfd;color:#4338ca;border:0;font-weight:600;font-size:12px;padding:8px 12px;border-radius:9px;cursor:pointer">Try in prototype ↓</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;flex:1">
+        <!-- mini: empty groups -->
+        <div style="display:flex;flex-direction:column;gap:9px;width:184px;flex:none">
+          <div style="width:184px;height:288px;background:#f6f7f9;border:1px solid #e6e8ec;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 24px rgba(20,21,43,.07)">
+            <div style="padding:12px 13px 6px;display:flex;align-items:center;justify-content:space-between"><div style="font-size:14px;font-weight:800">Split</div><div style="width:22px;height:22px;border-radius:999px;background:#4f46e5;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center">Y</div></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;padding:0 18px">
+              <div style="width:48px;height:48px;border-radius:14px;background:#ecebfd;display:grid;place-items:center;font-size:23px">💸</div>
+              <div style="font-size:13px;font-weight:700">No groups yet</div>
+              <div style="font-size:10.5px;color:#9aa1ad;line-height:1.4">Start splitting costs with friends.</div>
+              <div style="margin-top:4px;background:#4f46e5;color:#fff;font-size:11px;font-weight:600;padding:7px 14px;border-radius:9px">＋ New group</div>
+            </div>
+          </div>
+          <div style="font-size:12px;font-weight:700">Groups — empty</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:none"><div style="font-size:10px;font-weight:700;color:#4f46e5;text-transform:uppercase;letter-spacing:.04em">tap +</div><div style="color:#c7cbd3;font-size:22px">→</div></div>
+        <!-- mini: create -->
+        <div style="display:flex;flex-direction:column;gap:9px;width:184px;flex:none">
+          <div style="width:184px;height:288px;background:#f6f7f9;border:1px solid #e6e8ec;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 24px rgba(20,21,43,.07)">
+            <div style="padding:12px 13px 8px;display:flex;align-items:center;justify-content:space-between;font-size:12px"><span style="color:#4f46e5;font-weight:600">Cancel</span><span style="font-weight:700">New group</span><span style="width:30px"></span></div>
+            <div style="padding:2px 13px;display:flex;flex-direction:column;gap:7px">
+              <div style="font-size:9px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.05em">Name</div>
+              <div style="background:#fff;border:1.5px solid #4f46e5;border-radius:9px;padding:9px 10px;font-size:12px;font-weight:600">Trip to Byron</div>
+              <div style="font-size:9px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-top:5px">Members</div>
+              <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e6e8ec;border-radius:9px;padding:6px 8px"><div style="width:22px;height:22px;border-radius:999px;background:#4f46e5;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center">Y</div><span style="font-size:11px;font-weight:600">You</span></div>
+              <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e6e8ec;border-radius:9px;padding:6px 8px"><div style="width:22px;height:22px;border-radius:999px;background:#e5484d;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center">P</div><span style="font-size:11px;font-weight:600">Priya</span></div>
+              <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e6e8ec;border-radius:9px;padding:6px 8px"><div style="width:22px;height:22px;border-radius:999px;background:#15a86b;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center">S</div><span style="font-size:11px;font-weight:600">Sam</span></div>
+            </div>
+          </div>
+          <div style="font-size:12px;font-weight:700">Name it · add members</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:none"><div style="font-size:10px;font-weight:700;color:#4f46e5;text-transform:uppercase;letter-spacing:.04em">create</div><div style="color:#c7cbd3;font-size:22px">→</div></div>
+        <!-- mini: empty detail -->
+        <div style="display:flex;flex-direction:column;gap:9px;width:184px;flex:none">
+          <div style="width:184px;height:288px;background:#f6f7f9;border:1px solid #e6e8ec;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 24px rgba(20,21,43,.07);position:relative">
+            <div style="padding:12px 13px 6px;display:flex;align-items:center;gap:6px"><span style="color:#4f46e5;font-size:15px">‹</span><span style="font-size:14px;font-weight:800;letter-spacing:-0.01em">Trip to Byron</span></div>
+            <div style="display:flex;gap:16px;padding:0 13px;border-bottom:1.5px solid #e6e8ec"><div style="font-size:11px;font-weight:700;padding:6px 0;border-bottom:2.5px solid #4f46e5">Balances</div><div style="font-size:11px;font-weight:600;color:#9aa1ad;padding:6px 0">Activity</div></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:7px;padding:0 18px">
+              <div style="width:44px;height:44px;border-radius:13px;background:#ecebfd;display:grid;place-items:center;font-size:21px">🧾</div>
+              <div style="font-size:12.5px;font-weight:700">No expenses yet</div>
+              <div style="font-size:10px;color:#9aa1ad;line-height:1.4">Add the first one to start the tally.</div>
+            </div>
+            <div style="position:absolute;right:12px;bottom:12px;height:34px;padding:0 13px;border-radius:11px;background:#4f46e5;color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;box-shadow:0 6px 16px rgba(79,70,229,.35)">＋ Add</div>
+          </div>
+          <div style="font-size:12px;font-weight:700">Inside the new group</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LANE 2 -->
+    <div style="display:flex;align-items:flex-start;gap:18px;padding:22px 0;border-bottom:1px solid #eef0f3">
+      <div style="width:150px;flex:none;padding-top:36px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px"><div style="width:24px;height:24px;border-radius:8px;background:#4f46e5;color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center">2</div><div style="font-size:15px;font-weight:700">Log an expense</div></div>
+        <div style="font-size:12.5px;color:#6b7280;line-height:1.5;margin-bottom:12px">Amount, who paid, who it's split among (even by default) → it hits the feed, balances move.</div>
+        <button onClick="{{ jump2 }}" style="background:#ecebfd;color:#4338ca;border:0;font-weight:600;font-size:12px;padding:8px 12px;border-radius:9px;cursor:pointer">Try in prototype ↓</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;flex:1">
+        <!-- mini: group before -->
+        <div style="display:flex;flex-direction:column;gap:9px;width:184px;flex:none">
+          <div style="width:184px;height:288px;background:#f6f7f9;border:1px solid #e6e8ec;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 24px rgba(20,21,43,.07);position:relative">
+            <div style="padding:12px 13px 6px;display:flex;align-items:center;gap:6px"><span style="color:#4f46e5;font-size:15px">‹</span><span style="font-size:14px;font-weight:800;letter-spacing:-0.01em">Trip to Byron</span></div>
+            <div style="display:flex;gap:16px;padding:0 13px;border-bottom:1.5px solid #e6e8ec"><div style="font-size:11px;font-weight:600;color:#9aa1ad;padding:6px 0">Balances</div><div style="font-size:11px;font-weight:700;padding:6px 0;border-bottom:2.5px solid #4f46e5">Activity</div></div>
+            <div style="padding:11px 12px;display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #e6e8ec;border-radius:11px;padding:9px"><div style="width:30px;height:30px;border-radius:9px;background:#4f46e5;color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center">Y</div><div style="flex:1;min-width:0"><div style="font-size:11.5px;font-weight:600">Beach house Airbnb</div><div style="font-size:9.5px;color:#6b7280">You paid · split 3 ways</div></div><div style="font-size:12px;font-weight:700;font-variant-numeric:tabular-nums">$300.00</div></div>
+              <div style="display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #e6e8ec;border-radius:11px;padding:9px"><div style="width:30px;height:30px;border-radius:9px;background:#15a86b;color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center">S</div><div style="flex:1;min-width:0"><div style="font-size:11.5px;font-weight:600">Petrol</div><div style="font-size:9.5px;color:#6b7280">Sam paid · split 3 ways</div></div><div style="font-size:12px;font-weight:700;font-variant-numeric:tabular-nums">$60.00</div></div>
+            </div>
+            <div style="position:absolute;right:12px;bottom:12px;height:34px;padding:0 13px;border-radius:11px;background:#4f46e5;color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;box-shadow:0 6px 16px rgba(79,70,229,.35)">＋ Add</div>
+          </div>
+          <div style="font-size:12px;font-weight:700">Open the group</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:none"><div style="font-size:10px;font-weight:700;color:#4f46e5;text-transform:uppercase;letter-spacing:.04em">tap +</div><div style="color:#c7cbd3;font-size:22px">→</div></div>
+        <!-- mini: add expense -->
+        <div style="display:flex;flex-direction:column;gap:9px;width:184px;flex:none">
+          <div style="width:184px;height:288px;background:#f6f7f9;border:1px solid #e6e8ec;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 24px rgba(20,21,43,.07)">
+            <div style="padding:12px 13px 8px;display:flex;align-items:center;justify-content:space-between;font-size:12px"><span style="color:#4f46e5;font-weight:600">Cancel</span><span style="font-weight:700">Add expense</span><span style="width:30px"></span></div>
+            <div style="padding:2px 12px;display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;background:#fff;border:1.5px solid #4f46e5;border-radius:12px;padding:9px 11px;box-shadow:0 0 0 3px rgba(79,70,229,.1)"><span style="font-size:18px;font-weight:700;color:#9aa1ad;margin-right:3px">$</span><span style="font-size:26px;font-weight:800;letter-spacing:-0.02em;font-variant-numeric:tabular-nums">120.00</span></div>
+              <div style="font-size:9px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-top:3px">Paid by</div>
+              <div style="display:flex;gap:7px"><div style="width:30px;height:30px;border-radius:999px;background:#4f46e5;color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center;box-shadow:0 0 0 2.5px rgba(79,70,229,.9)">Y</div><div style="width:30px;height:30px;border-radius:999px;background:#e5484d;color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center">P</div><div style="width:30px;height:30px;border-radius:999px;background:#15a86b;color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center">S</div></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px"><span style="font-size:9px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.05em">Split evenly</span><span style="font-size:11px;font-weight:700;color:#4338ca">$40.00 each</span></div>
+            </div>
+          </div>
+          <div style="font-size:12px;font-weight:700">Amount · payer · split</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:none"><div style="font-size:10px;font-weight:700;color:#4f46e5;text-transform:uppercase;letter-spacing:.04em">save</div><div style="color:#c7cbd3;font-size:22px">→</div></div>
+        <!-- mini: after -->
+        <div style="display:flex;flex-direction:column;gap:9px;width:184px;flex:none">
+          <div style="width:184px;height:288px;background:#f6f7f9;border:1px solid #e6e8ec;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 24px rgba(20,21,43,.07)">
+            <div style="padding:12px 13px 6px;display:flex;align-items:center;gap:6px"><span style="color:#4f46e5;font-size:15px">‹</span><span style="font-size:14px;font-weight:800;letter-spacing:-0.01em">Trip to Byron</span></div>
+            <div style="display:flex;gap:16px;padding:0 13px;border-bottom:1.5px solid #e6e8ec"><div style="font-size:11px;font-weight:600;color:#9aa1ad;padding:6px 0">Balances</div><div style="font-size:11px;font-weight:700;padding:6px 0;border-bottom:2.5px solid #4f46e5">Activity</div></div>
+            <div style="padding:11px 12px;display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:9px;background:#fff;border:1.5px solid #4f46e5;border-radius:11px;padding:9px"><div style="width:30px;height:30px;border-radius:9px;background:#4f46e5;color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center">Y</div><div style="flex:1;min-width:0"><div style="font-size:11.5px;font-weight:600">Dinner at Stokehouse</div><div style="font-size:9.5px;color:#15a86b;font-weight:600">you lent $80.00</div></div><div style="font-size:12px;font-weight:700;font-variant-numeric:tabular-nums">$120.00</div></div>
+              <div style="display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #e6e8ec;border-radius:11px;padding:9px"><div style="width:30px;height:30px;border-radius:9px;background:#4f46e5;color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center">Y</div><div style="flex:1;min-width:0"><div style="font-size:11.5px;font-weight:600">Beach house Airbnb</div><div style="font-size:9.5px;color:#6b7280">You paid · split 3 ways</div></div><div style="font-size:12px;font-weight:700;font-variant-numeric:tabular-nums">$300.00</div></div>
+            </div>
+          </div>
+          <div style="font-size:12px;font-weight:700">It's in the feed</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LANE 3 -->
+    <div style="display:flex;align-items:flex-start;gap:18px;padding:22px 0">
+      <div style="width:150px;flex:none;padding-top:36px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px"><div style="width:24px;height:24px;border-radius:8px;background:#4f46e5;color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center">3</div><div style="font-size:15px;font-weight:700">Settle up</div></div>
+        <div style="font-size:12.5px;color:#6b7280;line-height:1.5;margin-bottom:12px">See who owes whom → tap settle → confirm → the balance clears.</div>
+        <button onClick="{{ jump3 }}" style="background:#ecebfd;color:#4338ca;border:0;font-weight:600;font-size:12px;padding:8px 12px;border-radius:9px;cursor:pointer">Try in prototype ↓</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;flex:1">
+        <!-- mini: balances -->
+        <div style="display:flex;flex-direction:column;gap:9px;width:184px;flex:none">
+          <div style="width:184px;height:288px;background:#f6f7f9;border:1px solid #e6e8ec;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 24px rgba(20,21,43,.07)">
+            <div style="padding:12px 13px 6px;display:flex;align-items:center;gap:6px"><span style="color:#4f46e5;font-size:15px">‹</span><span style="font-size:14px;font-weight:800;letter-spacing:-0.01em">Trip to Byron</span></div>
+            <div style="display:flex;gap:16px;padding:0 13px;border-bottom:1.5px solid #e6e8ec"><div style="font-size:11px;font-weight:700;padding:6px 0;border-bottom:2.5px solid #4f46e5">Balances</div><div style="font-size:11px;font-weight:600;color:#9aa1ad;padding:6px 0">Activity</div></div>
+            <div style="padding:11px 12px;display:flex;flex-direction:column;gap:9px">
+              <div style="background:#fff;border:1px solid #e6e8ec;border-radius:12px;padding:11px"><div style="font-size:9px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.05em">You're owed</div><div style="font-size:26px;font-weight:800;color:#15a86b;font-variant-numeric:tabular-nums;letter-spacing:-0.02em">$260.00</div></div>
+              <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e6e8ec;border-radius:11px;padding:8px"><div style="width:26px;height:26px;border-radius:999px;background:#e5484d;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center">P</div><span style="color:#c7cbd3;font-size:12px">→</span><div style="width:26px;height:26px;border-radius:999px;background:#4f46e5;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center">Y</div><div style="flex:1;font-size:10px;font-weight:600;color:#15a86b">Priya owes you</div><div style="background:#4f46e5;color:#fff;font-size:9.5px;font-weight:600;padding:5px 9px;border-radius:999px">Settle</div></div>
+            </div>
+          </div>
+          <div style="font-size:12px;font-weight:700">Who owes whom</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:none"><div style="font-size:10px;font-weight:700;color:#4f46e5;text-transform:uppercase;letter-spacing:.04em">settle</div><div style="color:#c7cbd3;font-size:22px">→</div></div>
+        <!-- mini: confirm -->
+        <div style="display:flex;flex-direction:column;gap:9px;width:184px;flex:none">
+          <div style="width:184px;height:288px;background:#f6f7f9;border:1px solid #e6e8ec;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 24px rgba(20,21,43,.07)">
+            <div style="padding:12px 13px 8px;display:flex;align-items:center;justify-content:space-between;font-size:12px"><span style="color:#4f46e5;font-weight:600">Cancel</span><span style="font-weight:700">Settle up</span><span style="width:30px"></span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0 14px">
+              <div style="display:flex;align-items:center;gap:10px"><div style="width:42px;height:42px;border-radius:999px;background:#e5484d;color:#fff;font-size:16px;font-weight:700;display:grid;place-items:center">P</div><span style="color:#c7cbd3;font-size:18px">→</span><div style="width:42px;height:42px;border-radius:999px;background:#4f46e5;color:#fff;font-size:16px;font-weight:700;display:grid;place-items:center">Y</div></div>
+              <div style="font-size:11px;color:#6b7280;font-weight:600;margin-top:8px">Priya pays you</div>
+              <div style="font-size:30px;font-weight:800;color:#15a86b;font-variant-numeric:tabular-nums;letter-spacing:-0.02em">$160.00</div>
+              <div style="width:100%;background:#fff;border:1px solid #e6e8ec;border-radius:10px;margin-top:8px;font-size:9.5px"><div style="display:flex;justify-content:space-between;padding:7px 9px;border-bottom:1px solid #eef0f3"><span style="color:#6b7280">Before</span><b style="color:#15a86b">$160.00</b></div><div style="display:flex;justify-content:space-between;padding:7px 9px"><span style="color:#6b7280">After</span><b style="color:#15a86b">$0.00</b></div></div>
+            </div>
+          </div>
+          <div style="font-size:12px;font-weight:700">Confirm the payment</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:none"><div style="font-size:10px;font-weight:700;color:#4f46e5;text-transform:uppercase;letter-spacing:.04em">done</div><div style="color:#c7cbd3;font-size:22px">→</div></div>
+        <!-- mini: cleared -->
+        <div style="display:flex;flex-direction:column;gap:9px;width:184px;flex:none">
+          <div style="width:184px;height:288px;background:#f6f7f9;border:1px solid #e6e8ec;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 24px rgba(20,21,43,.07);position:relative">
+            <div style="padding:12px 13px 6px;display:flex;align-items:center;gap:6px"><span style="color:#4f46e5;font-size:15px">‹</span><span style="font-size:14px;font-weight:800;letter-spacing:-0.01em">Trip to Byron</span></div>
+            <div style="display:flex;gap:16px;padding:0 13px;border-bottom:1.5px solid #e6e8ec"><div style="font-size:11px;font-weight:700;padding:6px 0;border-bottom:2.5px solid #4f46e5">Balances</div><div style="font-size:11px;font-weight:600;color:#9aa1ad;padding:6px 0">Activity</div></div>
+            <div style="padding:11px 12px;display:flex;flex-direction:column;gap:9px">
+              <div style="background:#fff;border:1px solid #e6e8ec;border-radius:12px;padding:11px"><div style="font-size:9px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.05em">You're owed</div><div style="font-size:26px;font-weight:800;color:#15a86b;font-variant-numeric:tabular-nums;letter-spacing:-0.02em">$100.00</div></div>
+              <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e6e8ec;border-radius:11px;padding:8px"><div style="width:26px;height:26px;border-radius:999px;background:#15a86b;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center">S</div><span style="color:#c7cbd3;font-size:12px">→</span><div style="width:26px;height:26px;border-radius:999px;background:#4f46e5;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center">Y</div><div style="flex:1;font-size:10px;font-weight:600;color:#15a86b">Sam owes you</div><div style="background:#4f46e5;color:#fff;font-size:9.5px;font-weight:600;padding:5px 9px;border-radius:999px">Settle</div></div>
+            </div>
+            <div style="position:absolute;left:12px;right:12px;bottom:12px;background:#e3f6ed;color:#0f7d50;font-size:10px;font-weight:600;padding:8px 10px;border-radius:10px;text-align:center">✓ Settled up with Priya</div>
+          </div>
+          <div style="font-size:12px;font-weight:700">Balance clears</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ LIVE PROTOTYPE (PHONE) ============ -->
+<div style="position:absolute;left:60px;top:1420px;width:420px">
+  <div data-drags-parent="1" style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;margin-bottom:12px">Live prototype — tap through it</div>
+  <div style="width:392px;height:812px;background:#fff;border-radius:44px;border:1px solid #e6e8ec;box-shadow:0 1px 3px rgba(0,0,0,.08),0 40px 80px rgba(20,21,43,.18);overflow:hidden;display:flex;flex-direction:column">
+    <!-- status bar -->
+    <div style="height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;background:#f6f7f9;flex:none">
+      <div style="font-size:14px;font-weight:700">9:41</div>
+      <div style="display:flex;align-items:center;gap:7px">
+        <div style="display:flex;gap:2px;align-items:flex-end;height:11px"><div style="width:3px;height:5px;background:#14152b;border-radius:1px"></div><div style="width:3px;height:7px;background:#14152b;border-radius:1px"></div><div style="width:3px;height:9px;background:#14152b;border-radius:1px"></div><div style="width:3px;height:11px;background:#14152b;border-radius:1px"></div></div>
+        <div style="width:22px;height:11px;border:1.5px solid #14152b;border-radius:3px;position:relative;display:flex;align-items:center;padding:1.5px"><div style="width:13px;height:100%;background:#14152b;border-radius:1px"></div></div>
+      </div>
+    </div>
+    <!-- screen area -->
+    <div class="scr" style="flex:1;overflow:hidden;background:#f6f7f9;position:relative">
+
+      <!-- GROUPS -->
+      <sc-if value="{{ isGroups }}" hint-placeholder-val="{{ true }}">
+        <div data-screen-label="Groups" style="height:100%;display:flex;flex-direction:column;position:relative">
+          <div style="padding:18px 18px 8px;display:flex;align-items:center;justify-content:space-between;flex:none">
+            <div style="font-size:24px;font-weight:800;letter-spacing:-0.02em">Split</div>
+            <div style="width:36px;height:36px;border-radius:999px;background:#4f46e5;color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px">Y</div>
+          </div>
+          <div class="scr" style="flex:1;overflow-y:auto;padding:6px 18px 100px">
+            <div style="background:#fff;border:1px solid #e6e8ec;border-radius:18px;padding:18px 20px;box-shadow:0 1px 2px rgba(20,21,43,.04),0 4px 16px rgba(20,21,43,.05);margin-bottom:18px">
+              <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#6b7280">{{ homeCap }}</div>
+              <div style="font-size:40px;font-weight:800;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;margin-top:4px;color:{{ homeColor }}">{{ homeAmt }}</div>
+              <div style="font-size:13px;color:#9aa1ad;margin-top:2px">across all your groups</div>
+            </div>
+            <div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin:0 2px 10px">Your groups</div>
+            <sc-if value="{{ hasGroups }}" hint-placeholder-val="{{ true }}">
+              <div style="background:#fff;border:1px solid #e6e8ec;border-radius:16px;overflow:hidden;box-shadow:0 1px 2px rgba(20,21,43,.04),0 4px 16px rgba(20,21,43,.05)">
+                <sc-for list="{{ groupRows }}" as="row" hint-placeholder-count="3">
+                  <div onClick="{{ row.open }}" style="display:flex;align-items:center;gap:13px;padding:15px 16px;border-bottom:1px solid #eef0f3;cursor:pointer">
+                    <div style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:17px;flex:none;background:{{ row.gradient }}">{{ row.initial }}</div>
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:16px;font-weight:600;color:#14152b">{{ row.name }}</div>
+                      <div style="font-size:13px;color:#6b7280">{{ row.meta }}</div>
+                    </div>
+                    <div style="text-align:right;flex:none">
+                      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:{{ row.color }}">{{ row.sub }}</div>
+                      <div style="font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;color:{{ row.color }}">{{ row.summary }}</div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ noGroups }}" hint-placeholder-val="{{ false }}">
+              <div style="background:#fff;border:1px dashed #d3d7de;border-radius:18px;padding:40px 24px;text-align:center">
+                <div style="width:64px;height:64px;border-radius:18px;background:#ecebfd;display:grid;place-items:center;margin:0 auto 16px;font-size:30px">💸</div>
+                <div style="font-size:18px;font-weight:700;margin-bottom:6px">No groups yet</div>
+                <div style="font-size:14px;color:#6b7280;line-height:1.5;margin-bottom:18px">Create a group to start splitting costs with friends, flatmates or your next trip.</div>
+                <button onClick="{{ openCreate }}" style="background:#4f46e5;color:#fff;border:0;font-weight:600;font-size:15px;padding:12px 22px;border-radius:12px;cursor:pointer">Create a group</button>
+              </div>
+            </sc-if>
+          </div>
+          <button onClick="{{ openCreate }}" style="position:absolute;right:18px;bottom:18px;height:52px;padding:0 22px;border-radius:16px;background:#4f46e5;color:#fff;border:0;font-weight:600;font-size:15px;cursor:pointer;box-shadow:0 6px 20px rgba(79,70,229,.35);display:inline-flex;align-items:center;gap:8px">＋ New group</button>
+        </div>
+      </sc-if>
+
+      <!-- CREATE -->
+      <sc-if value="{{ isCreate }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="Create group" style="height:100%;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid #eef0f3;flex:none">
+            <button onClick="{{ goGroups }}" style="background:none;border:0;font-size:15px;font-weight:600;color:#4f46e5;cursor:pointer;padding:0">Cancel</button>
+            <div style="font-size:16px;font-weight:700">New group</div>
+            <div style="width:48px"></div>
+          </div>
+          <div class="scr" style="flex:1;overflow-y:auto;padding:20px 18px">
+            <div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin-bottom:8px">Group name</div>
+            <input value="{{ create.draftName }}" onInput="{{ create.onName }}" placeholder="e.g. Trip to Byron" style="width:100%;background:#fff;border:1.5px solid #e6e8ec;border-radius:12px;padding:13px 14px;font-size:16px;color:#14152b;outline:none" />
+            <div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin:22px 0 10px">Members</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+              <sc-for list="{{ create.members }}" as="m" hint-placeholder-count="2">
+                <div style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e6e8ec;border-radius:12px;padding:10px 12px">
+                  <div style="width:36px;height:36px;border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px;background:{{ m.c }}">{{ m.i }}</div>
+                  <div style="flex:1;font-size:15px;font-weight:600">{{ m.name }}</div>
+                  <sc-if value="{{ m.isYou }}" hint-placeholder-val="{{ true }}"><div style="font-size:12px;color:#9aa1ad;font-weight:500">you</div></sc-if>
+                  <sc-if value="{{ m.removable }}" hint-placeholder-val="{{ false }}"><button onClick="{{ m.remove }}" style="background:none;border:0;color:#9aa1ad;font-size:22px;cursor:pointer;padding:0 4px;line-height:1">×</button></sc-if>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:8px">
+              <input value="{{ create.newName }}" onInput="{{ create.onNewName }}" placeholder="Add a member by name" style="flex:1;min-width:0;background:#fff;border:1.5px solid #e6e8ec;border-radius:12px;padding:12px 14px;font-size:15px;outline:none" />
+              <button onClick="{{ create.addMember }}" style="background:#ecebfd;color:#4338ca;border:0;font-weight:600;font-size:15px;padding:0 18px;border-radius:12px;cursor:pointer;flex:none">Add</button>
+            </div>
+            <div style="font-size:12px;color:#9aa1ad;margin-top:10px;line-height:1.5">You're added automatically. Add at least one other person to split with.</div>
+          </div>
+          <div style="padding:14px 18px 18px;border-top:1px solid #eef0f3;flex:none">
+            <button onClick="{{ create.create }}" disabled="{{ create.cantCreate }}" style="width:100%;background:{{ create.btnBg }};color:{{ create.btnColor }};border:0;font-weight:600;font-size:16px;padding:15px;border-radius:14px;cursor:pointer">Create group</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- DETAIL -->
+      <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="Group detail" style="height:100%;display:flex;flex-direction:column;position:relative">
+          <div style="display:flex;align-items:center;gap:10px;padding:14px 18px 12px;flex:none">
+            <button onClick="{{ goGroups }}" style="background:none;border:0;color:#4f46e5;font-size:24px;cursor:pointer;padding:0;line-height:1;font-weight:600">‹</button>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:20px;font-weight:800;letter-spacing:-0.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ gName }}</div>
+              <div style="font-size:12px;color:#9aa1ad">{{ gMeta }}</div>
+            </div>
+            <div style="display:flex">
+              <sc-for list="{{ detailMembers }}" as="m" hint-placeholder-count="3">
+                <div style="width:30px;height:30px;border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:12px;border:2px solid #f6f7f9;margin-left:-8px;background:{{ m.c }}">{{ m.i }}</div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:flex;gap:26px;padding:0 18px;border-bottom:1.5px solid #e6e8ec;flex:none">
+            <div onClick="{{ setBalances }}" style="padding:11px 0;font-size:16px;font-weight:600;cursor:pointer;color:{{ balTabColor }};border-bottom:3px solid {{ balTabBar }}">Balances</div>
+            <div onClick="{{ setActivity }}" style="padding:11px 0;font-size:16px;font-weight:600;cursor:pointer;color:{{ actTabColor }};border-bottom:3px solid {{ actTabBar }}">Activity</div>
+          </div>
+          <div class="scr" style="flex:1;overflow-y:auto;padding:18px 18px 100px">
+            <sc-if value="{{ isBalancesTab }}" hint-placeholder-val="{{ true }}">
+              <div style="background:#fff;border:1px solid #e6e8ec;border-radius:18px;padding:20px;box-shadow:0 1px 2px rgba(20,21,43,.04),0 4px 16px rgba(20,21,43,.05);margin-bottom:18px">
+                <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#6b7280">{{ heroCap }}</div>
+                <div style="font-size:44px;font-weight:800;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;margin-top:4px;color:{{ heroColor }}">{{ heroAmt }}</div>
+                <div style="font-size:13px;color:#9aa1ad;margin-top:2px">{{ heroSub }}</div>
+              </div>
+              <sc-if value="{{ hasBalances }}" hint-placeholder-val="{{ true }}">
+                <div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin:0 2px 10px">Who owes whom</div>
+                <div style="background:#fff;border:1px solid #e6e8ec;border-radius:16px;overflow:hidden">
+                  <sc-for list="{{ balanceRows }}" as="row" hint-placeholder-count="2">
+                    <div style="display:flex;align-items:center;gap:10px;padding:14px;border-bottom:1px solid #eef0f3">
+                      <div style="width:34px;height:34px;border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px;flex:none;background:{{ row.fromColor }}">{{ row.fromI }}</div>
+                      <div style="color:#c7cbd3;font-size:16px">→</div>
+                      <div style="width:34px;height:34px;border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px;flex:none;background:{{ row.toColor }}">{{ row.toI }}</div>
+                      <div style="flex:1;min-width:0">
+                        <div style="font-size:14px;font-weight:600;color:{{ row.labelColor }}">{{ row.label }}</div>
+                        <div style="font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;color:#14152b">{{ row.amount }}</div>
+                      </div>
+                      <button onClick="{{ row.settle }}" style="background:#4f46e5;color:#fff;border:0;font-weight:600;font-size:13px;padding:9px 16px;border-radius:999px;cursor:pointer;flex:none">Settle</button>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ allSquare }}" hint-placeholder-val="{{ false }}">
+                <div style="background:#fff;border:1px dashed #d3d7de;border-radius:16px;padding:30px 20px;text-align:center">
+                  <div style="font-size:34px;margin-bottom:8px">🎉</div>
+                  <div style="font-size:16px;font-weight:700;margin-bottom:4px">All settled up</div>
+                  <div style="font-size:14px;color:#6b7280">Everyone in this group is square.</div>
+                </div>
+              </sc-if>
+            </sc-if>
+            <sc-if value="{{ isActivityTab }}" hint-placeholder-val="{{ false }}">
+              <sc-if value="{{ hasActivity }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;flex-direction:column;gap:10px">
+                  <sc-for list="{{ activityRows }}" as="row" hint-placeholder-count="3">
+                    <div style="display:flex;align-items:center;gap:13px;background:#fff;border:1px solid #e6e8ec;border-radius:14px;padding:14px">
+                      <div style="width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px;flex:none;background:{{ row.avColor }}">{{ row.avI }}</div>
+                      <div style="flex:1;min-width:0">
+                        <div style="font-size:15px;font-weight:600">{{ row.title }}</div>
+                        <div style="font-size:13px;color:#6b7280">{{ row.sub }}</div>
+                        <sc-if value="{{ row.hasNote }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;font-weight:600;margin-top:2px;color:{{ row.noteColor }}">{{ row.note }}</div></sc-if>
+                      </div>
+                      <div style="text-align:right;flex:none">
+                        <div style="font-weight:700;font-size:16px;font-variant-numeric:tabular-nums">{{ row.amount }}</div>
+                        <div style="font-size:11px;color:#9aa1ad">{{ row.ts }}</div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ noActivity }}" hint-placeholder-val="{{ false }}">
+                <div style="background:#fff;border:1px dashed #d3d7de;border-radius:18px;padding:40px 24px;text-align:center">
+                  <div style="width:64px;height:64px;border-radius:18px;background:#ecebfd;display:grid;place-items:center;margin:0 auto 16px;font-size:30px">🧾</div>
+                  <div style="font-size:18px;font-weight:700;margin-bottom:6px">No expenses yet</div>
+                  <div style="font-size:14px;color:#6b7280;line-height:1.5">Add your first expense and we'll keep a running tally for everyone.</div>
+                </div>
+              </sc-if>
+            </sc-if>
+          </div>
+          <button onClick="{{ openAddHandler }}" style="position:absolute;right:18px;bottom:18px;height:52px;padding:0 22px;border-radius:16px;background:#4f46e5;color:#fff;border:0;font-weight:600;font-size:15px;cursor:pointer;box-shadow:0 6px 20px rgba(79,70,229,.35);display:inline-flex;align-items:center;gap:8px">＋ Add expense</button>
+        </div>
+      </sc-if>
+
+      <!-- ADD EXPENSE -->
+      <sc-if value="{{ isAdd }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="Add expense" style="height:100%;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid #eef0f3;flex:none">
+            <button onClick="{{ cancelAdd }}" style="background:none;border:0;font-size:15px;font-weight:600;color:#4f46e5;cursor:pointer;padding:0">Cancel</button>
+            <div style="font-size:16px;font-weight:700">Add expense</div>
+            <div style="width:48px"></div>
+          </div>
+          <div class="scr" style="flex:1;overflow-y:auto;padding:18px">
+            <div style="display:flex;align-items:center;background:#fff;border:1.5px solid #4f46e5;border-radius:16px;padding:14px 18px;box-shadow:0 0 0 4px rgba(79,70,229,.1)">
+              <span style="font-size:28px;font-weight:700;color:#9aa1ad;margin-right:6px">{{ curSym }}</span>
+              <input value="{{ addAmount }}" onInput="{{ onAmount }}" inputmode="decimal" placeholder="0.00" style="border:0;outline:0;font-size:36px;font-weight:800;color:#14152b;width:100%;font-variant-numeric:tabular-nums;letter-spacing:-0.02em;background:none" />
+            </div>
+            <div style="display:flex;gap:8px;margin-top:10px">
+              <sc-for list="{{ quickAmounts }}" as="q" hint-placeholder-count="4">
+                <button onClick="{{ q.pick }}" style="flex:1;background:#eef0f3;color:#4338ca;border:0;font-weight:600;font-size:14px;padding:9px 0;border-radius:10px;cursor:pointer">{{ q.label }}</button>
+              </sc-for>
+            </div>
+            <div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin:22px 0 8px">Description</div>
+            <input value="{{ addDesc }}" onInput="{{ onDesc }}" placeholder="What was it for?" style="width:100%;background:#fff;border:1.5px solid #e6e8ec;border-radius:12px;padding:13px 14px;font-size:16px;outline:none" />
+            <div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin:22px 0 10px">Paid by</div>
+            <div class="scr" style="display:flex;gap:14px;overflow-x:auto;padding-bottom:2px">
+              <sc-for list="{{ payerOptions }}" as="p" hint-placeholder-count="3">
+                <div onClick="{{ p.pick }}" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex:none">
+                  <div style="width:50px;height:50px;border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:18px;background:{{ p.c }};box-shadow:0 0 0 {{ p.ring }} rgba(79,70,229,.9)">{{ p.i }}</div>
+                  <div style="font-size:12px;font-weight:600;color:{{ p.labelColor }}">{{ p.name }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin:22px 0 10px">
+              <div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#6b7280">Split between</div>
+              <div style="font-size:13px;font-weight:700;color:#4338ca">{{ perStr }}</div>
+            </div>
+            <div style="background:#fff;border:1px solid #e6e8ec;border-radius:14px;overflow:hidden">
+              <sc-for list="{{ splitOptions }}" as="m" hint-placeholder-count="3">
+                <div onClick="{{ m.toggle }}" style="display:flex;align-items:center;gap:12px;padding:13px 14px;border-bottom:1px solid #eef0f3;cursor:pointer">
+                  <div style="width:36px;height:36px;border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px;flex:none;background:{{ m.c }}">{{ m.i }}</div>
+                  <div style="flex:1;font-size:15px;font-weight:600">{{ m.name }}</div>
+                  <div style="font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;color:#6b7280;margin-right:4px">{{ m.share }}</div>
+                  <div style="width:24px;height:24px;border-radius:999px;display:grid;place-items:center;font-size:14px;color:#fff;background:{{ m.checkBg }};border:{{ m.checkBorder }}">{{ m.checkMark }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="padding:14px 18px 18px;border-top:1px solid #eef0f3;flex:none">
+            <button onClick="{{ save }}" disabled="{{ cantSave }}" style="width:100%;background:{{ saveBg }};color:{{ saveColor }};border:0;font-weight:600;font-size:16px;padding:15px;border-radius:14px;cursor:pointer">Save expense</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- SETTLE -->
+      <sc-if value="{{ isSettle }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="Settle up" style="height:100%;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid #eef0f3;flex:none">
+            <button onClick="{{ cancelSettle }}" style="background:none;border:0;font-size:15px;font-weight:600;color:#4f46e5;cursor:pointer;padding:0">Cancel</button>
+            <div style="font-size:16px;font-weight:700">Settle up</div>
+            <div style="width:48px"></div>
+          </div>
+          <div class="scr" style="flex:1;overflow-y:auto;padding:30px 18px;display:flex;flex-direction:column;align-items:center">
+            <div style="display:flex;align-items:center;gap:18px;margin-top:14px">
+              <div style="width:64px;height:64px;border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:25px;background:{{ settle.fromColor }}">{{ settle.fromI }}</div>
+              <div style="color:#c7cbd3;font-size:26px">→</div>
+              <div style="width:64px;height:64px;border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:25px;background:{{ settle.toColor }}">{{ settle.toI }}</div>
+            </div>
+            <div style="font-size:16px;font-weight:600;color:#6b7280;margin-top:24px">{{ settle.headline }}</div>
+            <div style="font-size:48px;font-weight:800;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;margin-top:4px;color:{{ settle.sColor }}">{{ settle.amount }}</div>
+            <div style="width:100%;background:#fff;border:1px solid #e6e8ec;border-radius:16px;overflow:hidden;margin-top:30px">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 16px;border-bottom:1px solid #eef0f3">
+                <div style="font-size:14px;color:#6b7280">Before this payment</div>
+                <div style="font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;color:{{ settle.sColor }}">{{ settle.amount }}</div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 16px">
+                <div style="font-size:14px;color:#6b7280">After</div>
+                <div style="font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;color:#15a86b">{{ settle.afterStr }} · square</div>
+              </div>
+            </div>
+            <div style="font-size:13px;color:#9aa1ad;margin-top:16px;text-align:center;line-height:1.5">Records the payment and clears this balance for both of you.</div>
+          </div>
+          <div style="padding:14px 18px 18px;border-top:1px solid #eef0f3;flex:none">
+            <button onClick="{{ settle.confirm }}" style="width:100%;background:#4f46e5;color:#fff;border:0;font-weight:600;font-size:16px;padding:15px;border-radius:14px;cursor:pointer">Mark as settled</button>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============ NOTES / RESET ============ -->
+<div style="position:absolute;left:520px;top:1420px;width:520px">
+  <div data-drags-parent="1" style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;margin-bottom:12px">How to use</div>
+  <div style="background:#fff;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.08),0 12px 30px rgba(20,21,43,.06);padding:24px 26px">
+    <div style="font-size:17px;font-weight:700;margin-bottom:8px">It's a real prototype</div>
+    <div style="font-size:14px;color:#6b7280;line-height:1.6;margin-bottom:18px">Create groups, log expenses and settle up — balances recompute live and persist between reloads. The phone to the left is fully interactive.</div>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px">
+      <div style="display:flex;gap:12px;align-items:flex-start"><div style="width:22px;height:22px;border-radius:7px;background:#4f46e5;color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center;flex:none">1</div><div style="font-size:14px;line-height:1.5"><b>First use</b> — tap <i>Reset to empty</i> below, then create your first group.</div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start"><div style="width:22px;height:22px;border-radius:7px;background:#4f46e5;color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center;flex:none">2</div><div style="font-size:14px;line-height:1.5"><b>Log an expense</b> — open <i>Trip to Byron</i> → Add expense → Save.</div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start"><div style="width:22px;height:22px;border-radius:7px;background:#4f46e5;color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center;flex:none">3</div><div style="font-size:14px;line-height:1.5"><b>Settle up</b> — on the Balances tab tap <i>Settle</i> and confirm.</div></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button onClick="{{ resetEmpty }}" style="background:#fdecec;color:#c93a3f;border:0;font-weight:600;font-size:14px;padding:11px 16px;border-radius:11px;cursor:pointer">↺ Reset to empty</button>
+      <button onClick="{{ reseed }}" style="background:#ecebfd;color:#4338ca;border:0;font-weight:600;font-size:14px;padding:11px 16px;border-radius:11px;cursor:pointer">⟳ Reload sample data</button>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:900},&quot;currencySymbol&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;$&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;evenSplitPreselect&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;showYouContext&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    let groups = this.seed();
+    try {
+      const raw = localStorage.getItem('split_state_v1');
+      if (raw) { const p = JSON.parse(raw); if (p && Array.isArray(p.groups)) groups = p.groups; }
+    } catch(e) {}
+    this.state = {
+      groups, screen:'groups', activeGroupId:null, detailTab:'balances',
+      draftName:'', draftMembers:[], newMemberName:'',
+      exAmount:'', exDesc:'', exPaidBy:'You', exSplit:[],
+      settle:{from:'',to:'',amount:0}
+    };
+  }
+  componentDidUpdate(){
+    try {
+      const cur = JSON.stringify({groups:this.state.groups});
+      if (cur !== this._saved){ this._saved = cur; localStorage.setItem('split_state_v1', cur); }
+    } catch(e) {}
+  }
+  colorFor(n){
+    const f={You:'#4f46e5',Priya:'#e5484d',Sam:'#15a86b',Maya:'#d97706',Kai:'#0891b2',Ana:'#7c3aed',Leo:'#db2777'};
+    if(f[n]) return f[n];
+    const pal=['#15a86b','#e5484d','#d97706','#0891b2','#7c3aed','#db2777','#0f7d50','#4338ca'];
+    let h=0; for(let i=0;i<n.length;i++) h=(h*31+n.charCodeAt(i))>>>0;
+    return pal[h%pal.length];
+  }
+  seed(){
+    const grads=[['#4f46e5','#4338ca'],['#0891b2','#0e7490'],['#6b7280','#4b5563']];
+    const M=n=>({name:n,color:this.colorFor(n)});
+    return [
+      {id:'g1',name:'Trip to Byron',icon:grads[0],members:[M('You'),M('Priya'),M('Sam')],items:[
+        {id:'e1',type:'expense',desc:'Beach house Airbnb',amount:300,paidBy:'You',split:['You','Priya','Sam'],ts:'4 days ago'},
+        {id:'e2',type:'expense',desc:'Petrol',amount:60,paidBy:'Sam',split:['You','Priya','Sam'],ts:'3 days ago'},
+        {id:'e3',type:'expense',desc:'Dinner at Stokehouse',amount:120,paidBy:'You',split:['You','Priya','Sam'],ts:'2 days ago'}
+      ]},
+      {id:'g2',name:'Ski weekend',icon:grads[1],members:[M('You'),M('Priya'),M('Maya')],items:[
+        {id:'e4',type:'expense',desc:'Lift passes',amount:180,paidBy:'Priya',split:['You','Priya','Maya'],ts:'1 week ago'},
+        {id:'e5',type:'expense',desc:'Groceries',amount:45,paidBy:'You',split:['You','Priya','Maya'],ts:'6 days ago'}
+      ]},
+      {id:'g3',name:'Coffee crew',icon:grads[2],members:[M('You'),M('Sam'),M('Priya')],items:[
+        {id:'e6',type:'expense',desc:'Coffees',amount:30,paidBy:'You',split:['You','Sam','Priya'],ts:'2 weeks ago'},
+        {id:'e7',type:'settle',from:'Sam',to:'You',amount:10,ts:'12 days ago'},
+        {id:'e8',type:'settle',from:'Priya',to:'You',amount:10,ts:'10 days ago'}
+      ]}
+    ];
+  }
+  balances(g){
+    const net={}; g.members.forEach(m=>net[m.name]=0);
+    g.items.forEach(it=>{
+      if(it.type==='expense'){
+        net[it.paidBy]=(net[it.paidBy]||0)+it.amount;
+        const sh=it.amount/it.split.length;
+        it.split.forEach(n=>net[n]=(net[n]||0)-sh);
+      } else {
+        net[it.from]=(net[it.from]||0)+it.amount;
+        net[it.to]=(net[it.to]||0)-it.amount;
+      }
+    });
+    Object.keys(net).forEach(k=>net[k]=Math.round(net[k]*100)/100);
+    return net;
+  }
+  simplify(net){
+    const cred=[],deb=[];
+    Object.keys(net).forEach(n=>{const v=net[n]; if(v>0.005)cred.push({n,v}); else if(v<-0.005)deb.push({n,v:-v});});
+    cred.sort((a,b)=>b.v-a.v); deb.sort((a,b)=>b.v-a.v);
+    const res=[]; let i=0,j=0;
+    while(i<deb.length && j<cred.length){
+      const pay=Math.min(deb[i].v,cred[j].v);
+      res.push({from:deb[i].n,to:cred[j].n,amount:Math.round(pay*100)/100});
+      deb[i].v-=pay; cred[j].v-=pay;
+      if(deb[i].v<0.005)i++; if(cred[j].v<0.005)j++;
+    }
+    return res;
+  }
+  active(){ return this.state.groups.find(g=>g.id===this.state.activeGroupId); }
+  openGroup(id){ this.setState({screen:'detail',activeGroupId:id,detailTab:'balances'}); }
+  goGroups(){ this.setState({screen:'groups'}); }
+  backToDetail(){ this.setState({screen:'detail'}); }
+  openCreate(){ this.setState({screen:'create',draftName:'',draftMembers:[{name:'You',color:'#4f46e5'}],newMemberName:''}); }
+  addMember(){
+    const n=this.state.newMemberName.trim(); if(!n) return;
+    if(this.state.draftMembers.some(m=>m.name.toLowerCase()===n.toLowerCase())) return;
+    this.setState(s=>({draftMembers:[...s.draftMembers,{name:n,color:this.colorFor(n)}],newMemberName:''}));
+  }
+  removeMember(i){ this.setState(s=>({draftMembers:s.draftMembers.filter((_,x)=>x!==i)})); }
+  createGroup(){
+    const name=this.state.draftName.trim();
+    if(!name || this.state.draftMembers.length<2) return;
+    const grads=[['#4f46e5','#4338ca'],['#15a86b','#0f7d50'],['#0891b2','#0e7490'],['#d97706','#b45309'],['#7c3aed','#6d28d9'],['#db2777','#be185d']];
+    const icon=grads[this.state.groups.length%grads.length];
+    const id='g'+Date.now();
+    const grp={id,name,icon,members:this.state.draftMembers.map(m=>({name:m.name,color:m.color})),items:[]};
+    this.setState(s=>({groups:[...s.groups,grp],screen:'detail',activeGroupId:id,detailTab:'activity'}));
+  }
+  openAdd(id){
+    const g=this.state.groups.find(x=>x.id===id);
+    const pre=(this.props.evenSplitPreselect??true)?g.members.map(m=>m.name):[];
+    this.setState({screen:'add',activeGroupId:id,exAmount:'',exDesc:'',exPaidBy:'You',exSplit:pre});
+  }
+  toggleSplit(n){ this.setState(s=>({exSplit:s.exSplit.includes(n)?s.exSplit.filter(x=>x!==n):[...s.exSplit,n]})); }
+  saveExpense(){
+    const g=this.active(); const amt=parseFloat(this.state.exAmount);
+    if(!amt||amt<=0||this.state.exSplit.length===0) return;
+    const item={id:'e'+Date.now(),type:'expense',desc:this.state.exDesc.trim()||'Expense',amount:Math.round(amt*100)/100,paidBy:this.state.exPaidBy,split:[...this.state.exSplit],ts:'just now'};
+    this.setState(s=>({groups:s.groups.map(x=>x.id===g.id?{...x,items:[...x.items,item]}:x),screen:'detail',detailTab:'activity'}));
+  }
+  openSettle(from,to,amount,id){ this.setState({screen:'settle',activeGroupId:id,settle:{from,to,amount}}); }
+  confirmSettle(){
+    const s=this.state.settle; const g=this.active();
+    const item={id:'s'+Date.now(),type:'settle',from:s.from,to:s.to,amount:s.amount,ts:'just now'};
+    this.setState(st=>({groups:st.groups.map(x=>x.id===g.id?{...x,items:[...x.items,item]}:x),screen:'detail',detailTab:'balances'}));
+  }
+  resetEmpty(){ this.setState({groups:[],screen:'groups'}); }
+  reseed(){ this.setState({groups:this.seed(),screen:'groups'}); }
+  jump(w){
+    if(w===1){ this.setState({groups:[],screen:'groups'}); return; }
+    let gs=this.state.groups; if(gs.length===0) gs=this.seed();
+    const g=gs[0];
+    if(w===2){
+      const pre=(this.props.evenSplitPreselect??true)?g.members.map(m=>m.name):[];
+      this.setState({groups:gs,screen:'add',activeGroupId:g.id,exAmount:'',exDesc:'',exPaidBy:'You',exSplit:pre});
+    } else {
+      this.setState({groups:gs,screen:'detail',activeGroupId:g.id,detailTab:'balances'});
+    }
+  }
+  renderVals(){
+    const S=this.state;
+    const cur=this.props.currencySymbol??'$';
+    const showYou=this.props.showYouContext??true;
+    const fmt=n=>cur+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+    const groups=S.groups;
+
+    // home
+    const overall=groups.reduce((a,g)=>a+(this.balances(g)['You']||0),0);
+    let homeCap='Overall, you’re all square',homeAmt=fmt(0),homeColor='#14152b';
+    if(overall>0.005){homeCap='Overall, you’re owed';homeAmt=fmt(overall);homeColor='#15a86b';}
+    else if(overall<-0.005){homeCap='Overall, you owe';homeAmt=fmt(overall);homeColor='#e5484d';}
+
+    const groupRows=groups.map(g=>{
+      const net=this.balances(g); const you=net['You']||0;
+      const ec=g.items.filter(i=>i.type==='expense').length;
+      let summary=fmt(0),color='#6b7280',sub='settled up';
+      if(you>0.005){summary=fmt(you);color='#15a86b';sub='owed to you';}
+      else if(you<-0.005){summary=fmt(you);color='#e5484d';sub='you owe';}
+      return {id:g.id,name:g.name,initial:g.name[0].toUpperCase(),
+        gradient:'linear-gradient(135deg,'+g.icon[0]+','+g.icon[1]+')',
+        meta:g.members.length+' people · '+ec+' '+(ec===1?'expense':'expenses'),
+        summary,color,sub,open:()=>this.openGroup(g.id)};
+    });
+
+    // detail
+    const g=this.active(); let dv={};
+    if(g){
+      const net=this.balances(g); const you=net['You']||0;
+      let heroCap='All settled up',heroColor='#14152b';
+      if(you>0.005){heroCap='You’re owed';heroColor='#15a86b';}
+      else if(you<-0.005){heroCap='You owe';heroColor='#e5484d';}
+      const debts=this.simplify(net);
+      const balanceRows=debts.map((d,i)=>{
+        let label,labelColor='#14152b';
+        if(d.to==='You'){label=d.from+' owes you';labelColor='#15a86b';}
+        else if(d.from==='You'){label='You owe '+d.to;labelColor='#e5484d';}
+        else {label=d.from+' owes '+d.to;}
+        return {key:'b'+i,fromI:d.from[0].toUpperCase(),toI:d.to[0].toUpperCase(),
+          fromColor:this.colorFor(d.from),toColor:this.colorFor(d.to),
+          label,labelColor,amount:fmt(d.amount),
+          settle:()=>this.openSettle(d.from,d.to,d.amount,g.id)};
+      });
+      const activityRows=[...g.items].reverse().map(it=>{
+        if(it.type==='expense'){
+          const sh=it.amount/it.split.length;
+          const youIn=it.split.includes('You'); const youPaid=it.paidBy==='You';
+          let note='',nc='#9aa1ad';
+          if(youPaid){ const lent=it.amount-(youIn?sh:0); note='you lent '+fmt(lent); nc='#15a86b'; }
+          else if(youIn){ note='you borrowed '+fmt(sh); nc='#e5484d'; }
+          return {key:it.id,title:it.desc,sub:it.paidBy+' paid · split '+it.split.length+' '+(it.split.length===1?'way':'ways'),
+            amount:fmt(it.amount),avI:it.paidBy[0].toUpperCase(),avColor:this.colorFor(it.paidBy),
+            note,noteColor:nc,hasNote:showYou&&!!note,ts:it.ts};
+        } else {
+          return {key:it.id,title:it.from+' paid '+it.to,sub:'Payment',amount:fmt(it.amount),
+            avI:'✓',avColor:'#15a86b',note:'',noteColor:'#9aa1ad',hasNote:false,ts:it.ts};
+        }
+      });
+      const ec=g.items.filter(i=>i.type==='expense').length;
+      dv={
+        gName:g.name, gMeta:g.members.length+' people · '+ec+' '+(ec===1?'expense':'expenses'),
+        detailMembers:g.members.map(m=>({i:m.name[0].toUpperCase(),c:m.color})),
+        isBalancesTab:S.detailTab==='balances', isActivityTab:S.detailTab==='activity',
+        balTabColor:S.detailTab==='balances'?'#14152b':'#9aa1ad', balTabBar:S.detailTab==='balances'?'#4f46e5':'transparent',
+        actTabColor:S.detailTab==='activity'?'#14152b':'#9aa1ad', actTabBar:S.detailTab==='activity'?'#4f46e5':'transparent',
+        heroCap, heroAmt:fmt(you), heroColor, heroSub:'in '+g.name,
+        hasBalances:balanceRows.length>0, allSquare:balanceRows.length===0, balanceRows,
+        hasActivity:g.items.length>0, noActivity:g.items.length===0, activityRows,
+        openAddHandler:()=>this.openAdd(g.id)
+      };
+    }
+
+    // add
+    let av={};
+    if(S.screen==='add' && g){
+      const amt=parseFloat(S.exAmount)||0; const cnt=S.exSplit.length; const per=cnt?amt/cnt:0;
+      const canSave=amt>0&&cnt>0;
+      av={
+        curSym:cur, addAmount:S.exAmount, addDesc:S.exDesc,
+        perStr:(amt>0&&cnt)?fmt(per)+' each · '+cnt+' people':'Split evenly',
+        onAmount:e=>this.setState({exAmount:e.target.value.replace(/[^0-9.]/g,'')}),
+        onDesc:e=>this.setState({exDesc:e.target.value}),
+        quickAmounts:['10','20','50','100'].map(v=>({label:cur+v,pick:()=>this.setState({exAmount:v})})),
+        payerOptions:g.members.map(m=>({name:m.name,i:m.name[0].toUpperCase(),c:m.color,
+          ring:m.name===S.exPaidBy?'3px':'0',labelColor:m.name===S.exPaidBy?'#14152b':'#9aa1ad',
+          pick:()=>this.setState({exPaidBy:m.name})})),
+        splitOptions:g.members.map(m=>{const sel=S.exSplit.includes(m.name);return {name:m.name,i:m.name[0].toUpperCase(),c:m.color,
+          share:(sel&&amt>0)?fmt(per):'—',
+          checkBg:sel?'#4f46e5':'transparent',checkBorder:sel?'0':'2px solid #e6e8ec',checkMark:sel?'✓':'',
+          toggle:()=>this.toggleSplit(m.name)};}),
+        canSave, cantSave:!canSave, saveBg:canSave?'#4f46e5':'#eef0f3', saveColor:canSave?'#fff':'#9aa1ad',
+        save:()=>this.saveExpense()
+      };
+    }
+
+    // create
+    const canCreate=!!S.draftName.trim() && S.draftMembers.length>=2;
+    const create={
+      draftName:S.draftName, onName:e=>this.setState({draftName:e.target.value}),
+      members:S.draftMembers.map((m,idx)=>({name:m.name,i:m.name[0].toUpperCase(),c:m.color,
+        isYou:m.name==='You',removable:m.name!=='You',remove:()=>this.removeMember(idx)})),
+      newName:S.newMemberName, onNewName:e=>this.setState({newMemberName:e.target.value}),
+      addMember:()=>this.addMember(),
+      canCreate, cantCreate:!canCreate, btnBg:canCreate?'#4f46e5':'#eef0f3', btnColor:canCreate?'#fff':'#9aa1ad',
+      create:()=>this.createGroup()
+    };
+
+    // settle
+    const s=S.settle;
+    let headline='',sColor='#14152b';
+    if(s.to==='You'){headline=s.from+' pays you';sColor='#15a86b';}
+    else if(s.from==='You'){headline='You pay '+s.to;sColor='#e5484d';}
+    else if(s.from){headline=s.from+' pays '+s.to;}
+    const settle={
+      fromI:(s.from||' ')[0].toUpperCase(), toI:(s.to||' ')[0].toUpperCase(),
+      fromColor:this.colorFor(s.from||'You'), toColor:this.colorFor(s.to||'You'),
+      headline, sColor, amount:fmt(s.amount||0), afterStr:fmt(0), confirm:()=>this.confirmSettle()
+    };
+
+    return {
+      isGroups:S.screen==='groups', isCreate:S.screen==='create', isDetail:S.screen==='detail',
+      isAdd:S.screen==='add', isSettle:S.screen==='settle',
+      homeCap, homeAmt, homeColor, hasGroups:groups.length>0, noGroups:groups.length===0, groupRows,
+      openCreate:()=>this.openCreate(), goGroups:()=>this.goGroups(),
+      setBalances:()=>this.setState({detailTab:'balances'}), setActivity:()=>this.setState({detailTab:'activity'}),
+      cancelAdd:()=>this.backToDetail(), cancelSettle:()=>this.backToDetail(),
+      create, settle, ...dv, ...av,
+      jump1:()=>this.jump(1), jump2:()=>this.jump(2), jump3:()=>this.jump(3),
+      resetEmpty:()=>this.resetEmpty(), reseed:()=>this.reseed()
+    };
+  }
+}
+</script>
+</body>
+</html>

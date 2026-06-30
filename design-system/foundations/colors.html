@@ -1,0 +1,53 @@
+<!-- @dsCard group="Colors" name="Colour tokens" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Split — Colours</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: #f6f7f9; color: #14152b; padding: 40px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b7280; margin: 0 0 14px; font-weight: 600; }
+  section { margin-bottom: 28px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+  .tok { background: #fff; border: 1px solid #e6e8ec; border-radius: 12px; overflow: hidden; }
+  .fill { height: 64px; }
+  .meta { padding: 10px 12px; }
+  .meta b { display: block; font-size: 13px; font-weight: 600; }
+  .meta code { font-size: 11px; color: #6b7280; font-family: ui-monospace, monospace; }
+</style>
+</head>
+<body>
+  <section>
+    <h2>Brand</h2>
+    <div class="grid">
+      <div class="tok"><div class="fill" style="background:#4f46e5"></div><div class="meta"><b>brand</b><code>#4F46E5</code></div></div>
+      <div class="tok"><div class="fill" style="background:#4338ca"></div><div class="meta"><b>brand-strong</b><code>#4338CA</code></div></div>
+      <div class="tok"><div class="fill" style="background:#ecebfd"></div><div class="meta"><b>brand-soft</b><code>#ECEBFD</code></div></div>
+    </div>
+  </section>
+  <section>
+    <h2>Money semantics</h2>
+    <div class="grid">
+      <div class="tok"><div class="fill" style="background:#15a86b"></div><div class="meta"><b>positive · owed to you</b><code>#15A86B</code></div></div>
+      <div class="tok"><div class="fill" style="background:#e3f6ed"></div><div class="meta"><b>positive-soft</b><code>#E3F6ED</code></div></div>
+      <div class="tok"><div class="fill" style="background:#e5484d"></div><div class="meta"><b>negative · you owe</b><code>#E5484D</code></div></div>
+      <div class="tok"><div class="fill" style="background:#fdecec"></div><div class="meta"><b>negative-soft</b><code>#FDECEC</code></div></div>
+      <div class="tok"><div class="fill" style="background:#6b7280"></div><div class="meta"><b>settled · all square</b><code>#6B7280</code></div></div>
+    </div>
+  </section>
+  <section>
+    <h2>Ink &amp; surfaces</h2>
+    <div class="grid">
+      <div class="tok"><div class="fill" style="background:#14152b"></div><div class="meta"><b>foreground</b><code>#14152B</code></div></div>
+      <div class="tok"><div class="fill" style="background:#6b7280"></div><div class="meta"><b>muted</b><code>#6B7280</code></div></div>
+      <div class="tok"><div class="fill" style="background:#9aa1ad"></div><div class="meta"><b>faint</b><code>#9AA1AD</code></div></div>
+      <div class="tok"><div class="fill" style="background:#ffffff;border-bottom:1px solid #e6e8ec"></div><div class="meta"><b>surface</b><code>#FFFFFF</code></div></div>
+      <div class="tok"><div class="fill" style="background:#f6f7f9"></div><div class="meta"><b>background</b><code>#F6F7F9</code></div></div>
+      <div class="tok"><div class="fill" style="background:#e6e8ec"></div><div class="meta"><b>border</b><code>#E6E8EC</code></div></div>
+    </div>
+  </section>
+</body>
+</html>

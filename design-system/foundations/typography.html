@@ -1,0 +1,30 @@
+<!-- @dsCard group="Type" name="Typography scale" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Split — Type</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: #f6f7f9; color: #14152b; padding: 40px; }
+  .row { display: flex; align-items: baseline; gap: 20px; padding: 14px 0; border-bottom: 1px solid #e6e8ec; }
+  .row:last-child { border-bottom: 0; }
+  .label { width: 150px; flex: none; font-size: 12px; color: #6b7280; font-family: ui-monospace, monospace; }
+  .sample { line-height: 1.1; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  .note { margin-top: 24px; font-size: 13px; color: #6b7280; line-height: 1.6; max-width: 60ch; }
+</style>
+</head>
+<body>
+  <div class="row"><div class="label">money / 800 · 44px</div><div class="sample tnum" style="font-size:44px;font-weight:800;letter-spacing:-0.02em">$240.00</div></div>
+  <div class="row"><div class="label">display / 800 · 32px</div><div class="sample" style="font-size:32px;font-weight:800;letter-spacing:-0.02em">Trip to Byron</div></div>
+  <div class="row"><div class="label">title / 700 · 22px</div><div class="sample" style="font-size:22px;font-weight:700">Balances</div></div>
+  <div class="row"><div class="label">heading / 600 · 17px</div><div class="sample" style="font-size:17px;font-weight:600">Dinner at Stokehouse</div></div>
+  <div class="row"><div class="label">body / 400 · 15px</div><div class="sample" style="font-size:15px;font-weight:400">Paid by Sam, split evenly between 3 people.</div></div>
+  <div class="row"><div class="label">label / 600 · 13px</div><div class="sample" style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:#6b7280">Split among</div></div>
+  <div class="row"><div class="label">caption / 500 · 12px</div><div class="sample" style="font-size:12px;font-weight:500;color:#9aa1ad">2 days ago</div></div>
+  <p class="note"><b>Inter</b> throughout. Money figures always use <code>tabular-nums</code> so digits align in lists. Display and money weights are heavy (800) with tight tracking; body stays at 400 for calm reading.</p>
+</body>
+</html>

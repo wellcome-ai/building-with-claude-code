@@ -1,0 +1,55 @@
+/* Split — design tokens as CSS custom properties.
+   Mirrors src/tokens.ts and the design system's globals.css.
+   Use whichever you prefer (TS objects or CSS vars). */
+
+:root {
+  /* Brand */
+  --brand: #4F46E5;
+  --brand-strong: #4338CA;
+  --brand-soft: #ECEBFD;
+
+  /* Money semantics */
+  --positive: #15A86B;
+  --positive-soft: #E3F6ED;
+  --positive-ink: #0F7D50;
+  --negative: #E5484D;
+  --negative-soft: #FDECEC;
+  --negative-ink: #C93A3F;
+  --settled: #6B7280;
+
+  /* Ink & surfaces */
+  --fg: #14152B;
+  --muted: #6B7280;
+  --faint: #9AA1AD;
+  --surface: #FFFFFF;
+  --background: #F6F7F9;
+  --border: #E6E8EC;
+  --border-soft: #EEF0F3;
+
+  /* Radii */
+  --radius-sm: 9px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-xl: 16px;
+  --radius-xxl: 18px;
+  --radius-pill: 999px;
+
+  /* Elevation */
+  --shadow-card: 0 1px 2px rgba(20,21,43,.04), 0 4px 16px rgba(20,21,43,.05);
+  --shadow-fab: 0 6px 20px rgba(79,70,229,.35);
+  --shadow-focus: 0 0 0 4px rgba(79,70,229,.12);
+
+  --font-family: "Inter", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  color: var(--fg);
+  background: var(--background);
+}
+
+/* Every money figure uses tabular-nums so columns align. */
+.tnum { font-variant-numeric: tabular-nums; }

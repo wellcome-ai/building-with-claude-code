@@ -1,0 +1,84 @@
+<!-- @dsCard group="Components" name="Balances — hero, pills & settle row" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Split — Balances</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: #f6f7f9; color: #14152b; padding: 40px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b7280; margin: 0 0 14px; font-weight: 600; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  .wrap { max-width: 400px; display: flex; flex-direction: column; gap: 30px; }
+
+  /* Hero summary */
+  .hero { background: #fff; border: 1px solid #e6e8ec; border-radius: 18px; padding: 22px; box-shadow: 0 1px 2px rgba(20,21,43,0.04), 0 4px 16px rgba(20,21,43,0.06); }
+  .hero .cap { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7280; }
+  .hero .big { font-size: 44px; font-weight: 800; letter-spacing: -0.02em; margin: 6px 0 2px; color: #15a86b; }
+  .hero .sub { font-size: 14px; color: #6b7280; }
+
+  /* Pills */
+  .pills { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 7px 13px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+  .pos { background: #e3f6ed; color: #0f7d50; }
+  .neg { background: #fdecec; color: #c93a3f; }
+  .neu { background: #eef0f3; color: #6b7280; }
+
+  /* Settle row */
+  .settle { background: #fff; border: 1px solid #e6e8ec; border-radius: 14px; overflow: hidden; }
+  .srow { display: flex; align-items: center; gap: 12px; padding: 15px 16px; border-bottom: 1px solid #eef0f3; }
+  .srow:last-child { border-bottom: 0; }
+  .av { width: 34px; height: 34px; border-radius: 999px; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 13px; flex: none; }
+  .arrow { color: #9aa1ad; font-size: 18px; }
+  .who { flex: 1; font-size: 15px; }
+  .who b { font-weight: 600; }
+  .owe { font-weight: 700; font-size: 16px; color: #e5484d; margin-right: 10px; }
+  .settle-btn { background: #4f46e5; color: #fff; border: 0; font-family: inherit; font-weight: 600; font-size: 13px; padding: 8px 14px; border-radius: 999px; cursor: pointer; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div>
+      <h2>Hero summary</h2>
+      <div class="hero">
+        <div class="cap">You're owed</div>
+        <div class="big tnum">$80.00</div>
+        <div class="sub">across Trip to Byron</div>
+      </div>
+    </div>
+
+    <div>
+      <h2>Balance pills</h2>
+      <div class="pills">
+        <span class="pill pos">▲ Owed to you $80.00</span>
+        <span class="pill neg">▼ You owe $45.50</span>
+        <span class="pill neu">All square</span>
+      </div>
+    </div>
+
+    <div>
+      <h2>Settle-up rows (simplified debts)</h2>
+      <div class="settle">
+        <div class="srow">
+          <div class="av" style="background:#e5484d">P</div>
+          <span class="arrow">→</span>
+          <div class="av" style="background:#4f46e5">K</div>
+          <div class="who"><b>Priya</b> owes <b>you</b></div>
+          <div class="owe tnum">$40.00</div>
+          <button class="settle-btn">Settle</button>
+        </div>
+        <div class="srow">
+          <div class="av" style="background:#15a86b">S</div>
+          <span class="arrow">→</span>
+          <div class="av" style="background:#4f46e5">K</div>
+          <div class="who"><b>Sam</b> owes <b>you</b></div>
+          <div class="owe tnum">$40.00</div>
+          <button class="settle-btn">Settle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

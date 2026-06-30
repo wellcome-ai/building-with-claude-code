@@ -1,0 +1,47 @@
+<!-- @dsCard group="Components" name="List rows — groups, members, activity" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Split — List rows</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: #f6f7f9; color: #14152b; padding: 40px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b7280; margin: 0 0 12px; font-weight: 600; }
+  .list { max-width: 420px; background: #fff; border: 1px solid #e6e8ec; border-radius: 16px; overflow: hidden; margin-bottom: 28px; box-shadow: 0 1px 2px rgba(20,21,43,0.04), 0 4px 16px rgba(20,21,43,0.06); }
+  .row { display: flex; align-items: center; gap: 14px; padding: 16px; border-bottom: 1px solid #eef0f3; }
+  .row:last-child { border-bottom: 0; }
+  .av { width: 40px; height: 40px; border-radius: 999px; display: grid; place-items: center; font-weight: 700; font-size: 15px; color: #fff; flex: none; }
+  .grp { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg,#4f46e5,#4338ca); display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 18px; flex: none; }
+  .main { flex: 1; min-width: 0; }
+  .main b { display: block; font-size: 16px; font-weight: 600; }
+  .main span { font-size: 13px; color: #6b7280; }
+  .amt { font-weight: 700; font-variant-numeric: tabular-nums; font-size: 16px; text-align: right; flex: none; }
+  .pos { color: #15a86b; }
+  .neg { color: #e5484d; }
+  .sub { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; display: block; }
+</style>
+</head>
+<body>
+  <h2>Groups list</h2>
+  <div class="list">
+    <div class="row"><div class="grp">B</div><div class="main"><b>Trip to Byron</b><span>3 people · 7 expenses</span></div><div class="amt pos"><span class="sub" style="color:#15a86b">owed</span>$80.00</div></div>
+    <div class="row"><div class="grp" style="background:linear-gradient(135deg,#15a86b,#0f7d50)">H</div><div class="main"><b>House bills</b><span>4 people · 12 expenses</span></div><div class="amt neg"><span class="sub" style="color:#e5484d">you owe</span>$45.50</div></div>
+    <div class="row"><div class="grp" style="background:linear-gradient(135deg,#6b7280,#4b5563)">C</div><div class="main"><b>Coffee crew</b><span>5 people · settled</span></div><div class="amt" style="color:#6b7280">$0.00</div></div>
+  </div>
+
+  <h2>Activity feed</h2>
+  <div class="list">
+    <div class="row"><div class="av" style="background:#4f46e5">Y</div><div class="main"><b>Dinner at Stokehouse</b><span>You paid · split 3 ways</span></div><div class="amt">$120.00</div></div>
+    <div class="row"><div class="av" style="background:#15a86b">S</div><div class="main"><b>Petrol</b><span>Sam paid · split 3 ways</span></div><div class="amt">$60.00</div></div>
+  </div>
+
+  <h2>Member row (multi-select)</h2>
+  <div class="list">
+    <div class="row"><div class="av" style="background:#4f46e5">Y</div><div class="main"><b>You</b><span>you</span></div><div style="width:24px;height:24px;border-radius:999px;background:#4f46e5;display:grid;place-items:center;color:#fff;font-size:14px">✓</div></div>
+    <div class="row"><div class="av" style="background:#e5484d">P</div><div class="main"><b>Priya</b></div><div style="width:24px;height:24px;border-radius:999px;border:2px solid #e6e8ec"></div></div>
+  </div>
+</body>
+</html>

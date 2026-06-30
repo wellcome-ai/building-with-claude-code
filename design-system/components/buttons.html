@@ -1,0 +1,52 @@
+<!-- @dsCard group="Components" name="Buttons" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Split — Buttons</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: #f6f7f9; color: #14152b; padding: 40px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b7280; margin: 0 0 14px; font-weight: 600; }
+  .row { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
+  button { font-family: inherit; font-weight: 600; font-size: 15px; border: 0; cursor: pointer; border-radius: 12px; padding: 12px 20px; }
+  .primary { background: #4f46e5; color: #fff; box-shadow: 0 4px 12px rgba(79,70,229,0.25); }
+  .secondary { background: #ecebfd; color: #4338ca; }
+  .ghost { background: transparent; color: #4f46e5; }
+  .danger { background: #fdecec; color: #e5484d; }
+  .pill { border-radius: 999px; }
+  .sm { padding: 8px 14px; font-size: 13px; }
+  .lg { padding: 15px 26px; font-size: 16px; width: 100%; justify-content: center; }
+  .disabled { background: #eef0f3; color: #9aa1ad; box-shadow: none; cursor: not-allowed; }
+  .lgwrap { max-width: 360px; }
+</style>
+</head>
+<body>
+  <h2>Variants</h2>
+  <div class="row">
+    <button class="primary">Add expense</button>
+    <button class="secondary">Add member</button>
+    <button class="ghost">Cancel</button>
+    <button class="danger">Delete</button>
+    <button class="primary disabled">Settle up</button>
+  </div>
+
+  <h2>Sizes</h2>
+  <div class="row">
+    <button class="primary sm">Small</button>
+    <button class="primary">Default</button>
+  </div>
+  <div class="row lgwrap">
+    <button class="primary lg">Large · full width</button>
+  </div>
+
+  <h2>Pills (filters / chips)</h2>
+  <div class="row">
+    <button class="primary pill sm">Even split</button>
+    <button class="secondary pill sm">By shares</button>
+    <button class="secondary pill sm">Exact amounts</button>
+  </div>
+</body>
+</html>
